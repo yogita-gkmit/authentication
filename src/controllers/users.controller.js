@@ -46,14 +46,7 @@ async function logout(req, res) {
 }
 
 async function currentUser(req, res) {
-	try {
-		res.send('user details successfully got displayed');
-	} catch (err) {
-		/* istanbul ignore next */
-		console.log(err.message);
-		/* istanbul ignore next */
-		res.status(400).json({ message: err.message });
-	}
+	res.json(req.user);
 }
 
 module.exports = { register, login, logout, currentUser };
