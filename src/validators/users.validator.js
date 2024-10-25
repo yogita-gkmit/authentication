@@ -12,4 +12,17 @@ async function validateUser(email) {
   }
 }
 
+// async function validatePassword(password) {
+//   try {
+//     const validPassword = await bcrypt.compare(password, user.password);
+//     if (!validPassword) {
+//       return res.status(401).json({ message: 'Invalid Password' });
+//     }
+
+//     return false;
+//   } catch (err) {
+//     return err.message;
+//   }
+// }
+
 module.exports = { validateUser };
