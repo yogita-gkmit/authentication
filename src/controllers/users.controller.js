@@ -1,4 +1,8 @@
-const { authUser, authUserLogin } = require('../services/users.service.js');
+const {
+	authUser,
+	authUserLogin,
+	list,
+} = require('../services/users.service.js');
 // const Users = require('../models/users.model.js');
 const { validateUser } = require('../validators/users.validator.js');
 
@@ -49,4 +53,16 @@ async function currentUser(req, res) {
 	res.json(req.user);
 }
 
-module.exports = { register, login, logout, currentUser };
+async function universities(req, res) {
+	try {
+		const response = await list();
+		res.send(response);
+	} catch (err) {
+		/* istanbul ignore next */
+		console.log(err.message);
+		/* istanbul ignore next */
+		res.status(400).json({ message: err.message });
+	}
+}
+
+module.exports = { register, login, logout, currentUser, universities };

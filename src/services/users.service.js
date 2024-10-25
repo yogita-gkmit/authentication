@@ -1,4 +1,5 @@
 const Users = require('../models/users.model.js');
+const axios = require('axios');
 const { validateUser } = require('../validators/users.validator.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -30,4 +31,12 @@ async function authUserLogin(email, password) {
 	return token;
 }
 
-module.exports = { authUser, authUserLogin };
+async function list() {
+	const universitiesList = await axios.get(
+		'http://universities.hipolabs.com/search?country=India',
+	);
+
+	return universitiesList.data;
+}
+
+module.exports = { authUser, authUserLogin, list };
