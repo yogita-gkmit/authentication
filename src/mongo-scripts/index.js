@@ -6,8 +6,8 @@ const { MongoClient } = require('mongodb');
 
 const url = process.argv[2];
 
-const test = require('./test.js');
-
+// const test = require('./test.js');
+const { addRoleDataToRoles } = require('./test.js');
 const client = new MongoClient(url);
 
 const dbName = 'pillpal';

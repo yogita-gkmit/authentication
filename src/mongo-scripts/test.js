@@ -1,30 +1,23 @@
-const findQuery = async function query(collection) {
-	// const data = await collection.find().toArray();
-	// console.log('Found Accounts Documents ==> ', data);
-
-	const data = await collection
-		.aggregate([
-			{
-				$project: {
-					_id: 1,
-					roles_accounts: {
-						$objectToArray: '$roles',
+async function addRolesCollection(db) {
+	await db.createCollection('roles', {
+		validator: {
+			$jsonSchema: {
+				bsonType: 'object',
+				required: ['name'],
+				properties: {
+					name: {
+						bsonType: 'string',
+						description: 'must be a string and is required',
+					},
+					description: {
+						bsonType: 'string',
+						description: 'must be a string',
 					},
 				},
 			},
-			{
-				$unwind: '$roles_accounts',
-			},
-			{
-				$group: {
-					_id: '$roles_accounts.k',
-					count: { $sum: 1 },
-				},
-			},
-		])
-		.toArray();
+		},
+		collation: { locale: 'en', strength: 2 },
+	});
+}
 
-	console.log('Found Accounts Documents ==> ', data);
-};
-
-module.exports = { findQuery };
+module.exports = { addRolesCollection };

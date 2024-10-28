@@ -1,4 +1,4 @@
-const Users = require('../models/users.model.js');
+const Users = require('../models/Users.js');
 
 async function validateUser(email) {
   try {

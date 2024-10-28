@@ -12,7 +12,9 @@ db.connectDb();
 app.use('/health-check', (req, res) => {
 	res.send('Health check api');
 });
+app.use('/api', require('./routes/auth.route.js'));
 app.use('/api', require('./routes/users.route.js'));
+app.use('/api', require('./routes/universities.route.js'));
 
 app.listen(PORT, () => {
 	console.log(`server is running on http://localhost:${PORT}`);
